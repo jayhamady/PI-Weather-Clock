@@ -233,8 +233,7 @@
             twentyMinutesLater.setMinutes(twentyMinutesLater.getMinutes() + timeOffsetminutes);
             var formattedString =  formatDate(twentyMinutesLater).split(' ')[0];
             timeDisplay.innerHTML = formattedString;
-            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            var dayName = days[twentyMinutesLater.getDay()] + ' ' + (twentyMinutesLater.getMonth() + 1) + '/' + twentyMinutesLater.getDate() + '/' +  twentyMinutesLater.getFullYear();
+            var dayName = fullDays[twentyMinutesLater.getDay()] + ' ' + (twentyMinutesLater.getMonth() + 1) + '/' + twentyMinutesLater.getDate() + '/' +  twentyMinutesLater.getFullYear();
             $('#mainDate').text(dayName);
         }
 
