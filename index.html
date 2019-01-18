@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+   
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/weather-icons.css" >
+    <link rel="stylesheet" href="css/weather-icons-wind.css">
+    <!--<link rel="stylesheet" href="/styles.css">-->
+</head>
+<style>
+    body{
+        background: black;
+        color: white;
+        margin-left: -15px;
+    }
+    .vertical-center {
+        min-height: 110%;
+        min-height: 40vh; 
+        display: flex;
+        align-items: center;
+    }
+    .fill { 
+    min-height: 100%;
+    height: 100%;
+}
+.element {
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+.elementInvert {
+	text-shadow:
+		-.5px -.5px 0 #FFF,
+		.5px -.5px 0 #FFF,
+		-.5px .5px 0 #FFF,
+		.5px .5px 0 #FFF;
+}
+</style>
+
+<div class="container-fluid">
+        <!-- Portfolio Item Row -->
+        <div class="row vertical-center">
+                
+          <div class="col-md-7" class="img-fluid">
+                <i class="wi wi-thermometer" class="text-center" style="color: white; zoom:2;margin-top: 20px;margin-left:5px; position: absolute"></i>
+              <h1 id="mainWeatherTemp" class="element" style="position: absolute;zoom:3;padding: 10px;">--&#176</h1>
+              <h4 id="mainWeatherCity" style="position: absolute;padding: 10px;margin-left: 400px;margin-top: 10px"><div id="divCityName">Current City</div></h4>
+              <h1 id="mainWeatherTempLow" class="element" style="position: absolute;zoom:1.5;margin-left: 55px;margin-top: 100px; color: gray">--&#176</h1>
+              <i id="mainWeatherIcon" class="wi wi-owm-night-800" class="text-center" style="color: white; zoom:12;margin-top: 10px;margin-left:16px; position: absolute"></i>
+              <h4 id="mainWeatherDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 220px;margin-top: 290px">Loading...</h4>
+              <h5 id="mainWeatherFullDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 20px;margin-top: 350px">Full weather description</h5>
+              <i id="mainWeatherWindIcon" class="wi wi-wind towards-325-deg" class="text-center" style="color:white; zoom:7;margin-top: 37px;margin-left:68px; position: absolute"></i>
+              <h4 id="mainWeatherWindNumber" class="element" style="position: absolute;padding: 10px;margin-left: 420px;margin-top: 350px">Wind - mph</h4>
+              <img id="mainWeatherCityImage" class="img-fluid" style="height: 400px;" src="">
+          </div>
+      
+          <div class="col-md-5" style="margin-right:-20px">
+              <h1 id="mainClock" class="text-center" style="font-size: 9em;margin-top:-20px"  >--:--</h1>
+              <h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4>
+                <div class="container" id="hourForecast">
+                        <div class="row">
+                            <div class="col-sm-4"><h4>--:-- am</h4></div>
+                            <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                            <div class="col-sm-2"><h4>--&#176</h4></div>
+                            <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                            <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-4"><h4>--:-- am</h4></div>
+                                <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-2"><h4>--&#176</h4></div>
+                                <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-4"><h4>--:-- am</h4></div>
+                                <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-2"><h4>--&#176</h4></div>
+                                <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-4"><h4>--:-- am</h4></div>
+                                <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-2"><h4>--&#176</h4></div>
+                                <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>  
+                        <div class="row">
+                                <div class="col-sm-4"><h4>--:-- am</h4></div>
+                                <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-2"><h4>--&#176</h4></div>
+                                <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>     
+                        <div class="row">
+                                <div class="col-sm-4"><h4>--:-- am</h4></div>
+                                <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-2"><h4>--&#176</h4></div>
+                                <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
+                                <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
+                        </div>                                                                         
+                    </div>
+          </div>
+      
+        </div>
+        <!-- /.row -->
+      
+        <!-- Related Projects Row -->
+        <!--<h3 class="my-4" >Space</h3>-->
+      
+        <div id="forecast" class="row vertical-center" style="position: fixed; bottom: 0;width: 100%;">
+      
+            <div class="col-md-2 col-sm-6 mb-4">
+                    <h2 class="text-center">Mon</h2>
+                    <div style="width: 100%; overflow: hidden;">
+                        <h4 class="text-center" style="margin-left: -20px"
+                        ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                    </div>
+                    <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                    <h1 class="text-center" style="zoom:1.5;padding-left: 10px">49&#176</h1>
+                    <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >35&#176</h1>
+            </div>
+      
+            <div class="col-md-2 col-sm-6 mb-4">
+                <h2 class="text-center">Tue</h2>
+                <div style="width: 100%; overflow: hidden;">
+                    
+                    <h4 class="text-center" style="margin-left: -20px"
+                    ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                </div>
+                <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                <h1 class="text-center" style="zoom:1.5;padding-left: 10px">19&#176</h1>
+                <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >15&#176</h1>
+            </div>
+      
+            <div class="col-md-2 col-sm-6 mb-4">
+                <h2 class="text-center">Wed</h2>
+                <div style="width: 100%; overflow: hidden;">
+                    
+                    <h4 class="text-center" style="margin-left: -20px"
+                    ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                </div>
+                <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                <h1 class="text-center" style="zoom:1.5;padding-left: 10px">9&#176</h1>
+                <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >5&#176</h1>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-4">
+                <h2 class="text-center">Thu</h2>
+                <div style="width: 100%; overflow: hidden;">
+                    
+                    <h4 class="text-center" style="margin-left: -20px"
+                    ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                </div>
+                <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                <h1 class="text-center" style="zoom:1.5;padding-left: 10px">29&#176</h1>
+                <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >15&#176</h1>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-4">
+                <h2 class="text-center">Fri</h2>
+                <div style="width: 100%; overflow: hidden;">
+                    
+                    <h4 class="text-center" style="margin-left: -20px"
+                    ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                </div>
+                <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                <h1 class="text-center" style="zoom:1.5;padding-left: 10px">39&#176</h1>
+                <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >15&#176</h1>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-4">
+                <h2 class="text-center">Sat</h2>
+                <div style="width: 100%; overflow: hidden;">
+                    
+                    <h4 class="text-center" style="margin-left: -20px"
+                    ><i class="wi wi-wind towards-23-deg" style="zoom: 1.3;margin-right:10px;margin-left: 10px"></i>-- mph</h4>
+                </div>
+                <h1 class="text-center"> <i class="wi wi-night-alt-snow-thunderstorm" class="text-center" style="color: white; zoom:2;margin-top: 5px"></i></h1>
+                <h1 class="text-center" style="zoom:1.5;padding-left: 10px">59&#176</h1>
+                <h3 class="text-center" style="zoom: 1.3;color: gray; margin-top: -10px" >15&#176</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+      
+      </div>
+      <!-- /.container -->
+
+      <script>
+      var data;
+      var fData
+      var dayOrNight;
+
+      var timeDisplay = document.getElementById("mainClock");
+
+        //Load Data the first time
+        GetData();
+
+        //Update Clock Time every second
+        setInterval(refreshTime, 1000);
+
+        //Refresh weather data
+        setInterval(GetData, (weatherRefreshMinutes * 60000));
+
+        function GetData(){
+            $.ajax({
+                type: "GET",
+                url: 'https://api.darksky.net/forecast/' + darkSkyID + '/' + longitude + ',' + latitude,
+                dataType: "jsonp",
+                data: data,
+                success: function(data){
+                    loadWeather(data);
+                    loadForecast(data);
+                },
+                error: function(error){
+                    alert("Error Calling Weather: " + error);
+                }
+            });
+
+        }
+
+        function refreshTime() {
+            var dateString = new Date().toLocaleString("en-US", {timeZone: "America/Detroit"});
+            var twentyMinutesLater = new Date();
+            twentyMinutesLater.setMinutes(twentyMinutesLater.getMinutes() + timeOffsetminutes);
+            var formattedString =  formatDate(twentyMinutesLater).split(' ')[0];
+            timeDisplay.innerHTML = formattedString;
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var dayName = days[twentyMinutesLater.getDay()] + ' ' + (twentyMinutesLater.getMonth() + 1) + '/' + twentyMinutesLater.getDate() + '/' +  twentyMinutesLater.getFullYear();
+            $('#mainDate').text(dayName);
+        }
+
+        function DayOrNight(weather){
+
+            var d = new Date();
+            var n = d.getTime() /1000;
+
+            if(n > weather.daily.data[0].sunriseTime && n < weather.daily.data[0].sunsetTime){
+                //day
+                dayOrNight = 'day';
+                $('#mainWeatherCityImage').attr('src', imgDay);
+            }else{
+                //night
+                dayOrNight = 'night';
+                $('#mainWeatherCityImage').attr('src',imgNight);
+            }
+        }
+
+        function loadForecast(weather){
+
+            //load Data for the hour by hour forecast
+            for(var i=0;i<=5;i++){
+                var CW = weather.hourly.data[i * forecastNumberHoursSkip];
+                var d = new Date(CW.time * 1000);
+
+                var mytime =  formatDate(d);
+                $('#hourForecast').children()[i].children[0].children[0].innerHTML = mytime;
+                $($('#hourForecast').children()[i].children[0].children[0]).css("text-align","right");
+                $($('#hourForecast').children()[i].children[1].children[0]).attr('class','wi ' + transIcon(CW.icon,dayOrNight));
+                $('#hourForecast').children()[i].children[2].children[0].innerHTML = Math.round(CW.temperature) + String.fromCharCode(176);
+                $($('#hourForecast').children()[i].children[3].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing) + '-deg');
+                $('#hourForecast').children()[i].children[4].children[0].innerHTML = Math.round(CW.windSpeed) + ' mph';
+            }
+
+            //Load Data for the next couple days
+            var today = new Date();
+            var tomorrow = new Date();
+
+            for(var i=1;i<7;i++){
+                tomorrow.setDate(today.getDate()+i);
+                tomorrow.setHours(7, 0, 0, 0);
+                var dateInt = Date.parse(tomorrow) / 1000;
+                var CW = weather.daily.data[i];
+
+                $('#forecast').children()[i-1].children[0].innerHTML = days[tomorrow.getDay()];
+                $($('#forecast').children()[i-1].children[1].children[0].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing) + '-deg');
+                var wind = $('#forecast').children()[i-1].children[1].children[0].innerHTML;
+                $('#forecast').children()[i-1].children[1].children[0].innerHTML = wind.replace('--', Math.round( CW.windSpeed) )
+                $($('#forecast').children()[i-1].children[2].children[0]).attr('class','wi ' + transIcon(CW.icon,dayOrNight));
+                $('#forecast').children()[i-1].children[3].innerHTML = Math.round(CW.temperatureHigh) + String.fromCharCode(176);
+                $('#forecast').children()[i-1].children[4].innerHTML = Math.round(CW.temperatureLow) + String.fromCharCode(176);
+            }
+        }
+
+        function loadWeather(weather){
+
+            $('#mainWeatherDesc').text(weather.currently.summary);
+
+            DayOrNight(weather);
+            var WC =  weather.currently;
+            
+            //weather.daily.data[0].summary
+            $('#mainWeatherFullDesc').text(weather.daily.data[0].summary);
+            $('#mainWeatherIcon').attr('class', 'wi ' + transIcon(WC.icon) );
+            $('#mainWeatherTemp').text(Math.round(WC.temperature) + String.fromCharCode(176));
+            $('#mainWeatherTempLow').text(Math.round(weather.daily.data[0].temperatureLow) + String.fromCharCode(176));
+            $('#mainWeatherWindIcon').attr('class', 'wi wi-wind towards-' + weather.daily.data[0].windBearing + '-deg')
+            $('#mainWeatherWindNumber').text('Wind ' + Math.round(weather.daily.data[0].windSpeed) + ' mph');
+            $('#mainWeatherCity').text(cityName);
+        }
+
+        function temperatureConverter(valNum) {
+            valNum = parseFloat(valNum);
+            return ((valNum-273.15)*1.8)+32;
+        }
+
+        function formatDate(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return  strTime;
+        }
+
+        //Icon Translation 
+        function transIcon(icoName,timeOfDay){
+
+            switch(icoName) {
+            case 'clear-day':
+                return 'wi-day-sunny';
+                break;
+            case 'clear-night':
+                return 'wi-night-clear';
+                break;
+            case 'rain':
+                return 'wi-' + timeOfDay + '-rain';
+                break;
+            case 'snow':
+                return 'wi-' + timeOfDay + '-snow';
+                break;
+            case 'sleet':
+                return 'wi-' + timeOfDay + '-sleet';
+                break;
+            case 'wind':
+                return 'wi-strong-wind';
+                break;
+            case 'fog':
+                return 'wi-' + timeOfDay + '-fog';
+                break;
+            case 'cloudy':
+                return 'wi-' + timeOfDay + '-cloudy';
+                break;
+            case 'partly-cloudy-day':
+                return 'wi-day-cloudy';
+                break;
+            case 'partly-cloudy-night':
+                return 'wi-night-cloudy';
+                break;
+            case 'hail':
+                return 'wi-' + timeOfDay + '-hail';
+                break;
+            case 'thunderstorm':
+                return 'wi-' + timeOfDay + '-thunderstorm';
+                break;
+            case 'tornado':
+                return 'wi-tornado';
+                break;         
+            default:
+                return 'wi-na';
+            }
+
+        }
+
+      </script>
