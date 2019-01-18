@@ -163,6 +163,8 @@ Future no skins made yet.
 
 ## <a name="credit"></a>Credit
 
+Project was fully inspired by https://github.com/userexec/Pi-Kitchen-Dashboard#pi-kitchen-dashboard - Once Yahoo weather switched to oAuth I made this project.
+
 Weather icons by Lukas Bischoff and Erik Flowers https://github.com/erikflowers/weather-icons. Icons licensed under [SIL OFL 1.1](http://scripts.sil.org/OFL).  
 
 Weather data retrieved using DarkSky.com  
