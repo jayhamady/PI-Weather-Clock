@@ -69,8 +69,8 @@
               <h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4> -->
                 <div class="container" id="hourForecast">
                         <div class="row">
-                                <div class="col-sm-12 text-right"><h1 id="mainClock" class="text-center" style="font-size: 11em;margin-top:-20px"  >--:--</h1></div>
-                                <!-- <div class="col-sm-4"><h6 id="mainClockPMAM" style="font-size: 5em;margin-top:90px">PM</h6></div> -->
+                                <div class="col-sm-10 text-right"><h1 id="mainClock" class="text-center" style="font-size: 9em;margin-top:-20px"  >--:--</h1></div>
+                                <div class="col-sm-2 text-left"><h6 id="mainClockPMAM" style="font-size: 2em;margin-top:60px;margin-left: -30px">--</h6></div>
                         </div> 
                         <div class="row">
                                     <div class="col-sm-12"><h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4></div>
@@ -244,6 +244,7 @@
                 $('#mainWeatherDesc').css('zoom',zoom);
                 $('#mainWeatherCity').css('zoom',zoom);
                 $('#hourForecast').css('zoom',zoom);
+                $('#mainClockPMAM').css('zoom',zoom);
                 for(var i=0;i<=5;i++){
                     $($('#forecast').children()[i]).css('zoom',zoom1);
                 }
@@ -265,6 +266,8 @@
                     tmpRefresh++;
                     if(tmpRefresh==2){
                         //Blank out Data with -- to show internet down
+                        $('#mainWeatherTemp').text('--');
+                        $('#mainWeatherTempLow').text('--');
                     }
                 }
             });
@@ -278,6 +281,8 @@
             timeDisplay.innerHTML = formattedString;
             var dayName = fullDays[twentyMinutesLater.getDay()] + ' ' + (twentyMinutesLater.getMonth() + 1) + '/' + twentyMinutesLater.getDate() + '/' +  twentyMinutesLater.getFullYear();
             $('#mainDate').text(dayName);
+            var ampm = (twentyMinutesLater.getHours() >= 12) ? "PM" : "AM";
+            $('#mainClockPMAM').text(ampm);
         }
 
         function DayOrNight(weather){
