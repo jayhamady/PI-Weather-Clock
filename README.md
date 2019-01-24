@@ -13,7 +13,9 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
         * [Disallowing screen sleep](#disallowingScreenSleep)
         * [Installing Unclutter](#hidingCursor)
         * [Installing Chromium](#installingChromium)
-        * [Auto-starting Unclutter and Midori](#autoStartingMidori)
+        * [Auto-starting Unclutter and Midori](#autoStartingChromium)
+        * [Auto-starting GitHub Pull Request for latest updates](#autoStartingGitHubPull)
+        
     <!-- - [Scheduling screen sleep](#scheduling) -->
 + [Changing the skin](#changingTheSkin)
 + [Credit](#credit) 
@@ -125,7 +127,7 @@ Chromium is used for the display.
 
 `sudo apt install -y chromium-browser`
 
-#### <a name="autoStartingMidori"></a>Auto-starting Unclutter and Midori
+#### <a name="autoStartingChromium"></a>Auto-starting Unclutter and Chromium
 
 1. Create a new directory at `~/.config/autostart` if it does not exist - `mkdir ~/.config/autostart`
 2. `cd ~/.config/autostart` - cd into this directory
@@ -142,10 +144,40 @@ Chromium is used for the display.
 	```
 	[Desktop Entry]
 	Type=Application
-	Exec=chromium-browser --kiosk file:///home/pi/PI-Weather-Clock/index.html
+	Exec=chromium-browser --full-screen --disable-infobars --disable-translate file:///home/pi/PI-Weather-Clock/index.html
 	```
+Your Pi should now atomatically start fullscreen mode and show the dashboard full screen once your desktop loads.  Kiosk mode ignores any pop up windows like 'Restore last pages'.
 
-Your Pi should now atomatically start kiosk mode and show the dashboard full screen once your desktop loads.  Kiosk mode ignores any pop up windows like 'Restore last pages'.
+#### <a name="autoStartingGitHubPull"></a>Auto-starting Github pull for new updates
+
+You can add your script executable command to the bottom of .bashrc that will run your script every time you log in.
+
+Make sure you are in the pi folder:
+
+`$ cd ~/`
+Create a file and write a script to run in the file:
+
+`$ sudo nano superscript`
+
+add the following line 
+```
+    cd ~/PI-Weather-Clock
+    cp config.js ~/config.js
+    git pull https://github.com/jayhamady/PI-Weather-Clock master
+    cp ~/config.js ~/PI-Weather-Clock/config.js
+```
+Open up .bashrc for configuration:
+
+`$ sudo nano .bashrc`
+Scroll down to the bottom and add the line: `
+```
+./superscript
+```
+
+
+
+
+#### <a name="TimeConfig"></a>Time Configuration
 
 Check your computers time `date` NOTE: This will be the actual time and not include the time offset from the config file.
 
