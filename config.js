@@ -20,5 +20,3 @@ var timeOffsetminutes = 15;
 var weatherRefreshMinutes = 60;
 //Forecast number of hour to skip on each hour forecast
 var forecastNumberHoursSkip = 3;
-//Is Production - Pull live data - else pull JSON Test Data
-var isProduction = false;
