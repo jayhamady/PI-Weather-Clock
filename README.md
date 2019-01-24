@@ -6,16 +6,17 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
 + [Items Needed](#itemsNeeded)
 + [Instructions](#instructions)
     - [Cloning](#cloning)
-    - [Fulfilling requirements](#fulfillingRequirements)
+    - [Update System](#updatingSystem)
+    <!-- - [Fulfilling requirements](#fulfillingRequirements) -->
     - [Setting your location](#settingYourLocation)
     - [Configuring your Pi](#configuringYourPi)
         * [Disallowing screen sleep](#disallowingScreenSleep)
         * [Installing Unclutter](#hidingCursor)
-        * [Installing Midori](#installingMidori)
+        * [Installing Chromium](#installingChromium)
         * [Auto-starting Unclutter and Midori](#autoStartingMidori)
-    - [Scheduling screen sleep](#scheduling)
+    <!-- - [Scheduling screen sleep](#scheduling) -->
 + [Changing the skin](#changingTheSkin)
-+ [Credit](#credit)
++ [Credit](#credit) 
 
 * * *
 
@@ -31,14 +32,21 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
 ### <a name="cloning"></a>Cloning
 
 Clone this repository with `git clone https://github.com/jayhamady/PI-Weather-Clock.git`.
+OR
+Specific Branch to clone example `git clone --single-branch --branch <branchname> host:/dir.git`
 
 If your Pi does not currently have git, you will need to install it first with `sudo apt-get install git`.
 
-### <a name="fulfillingRequirements"></a>Fulfilling requirements
+### <a name="updatingSystem"></a>Update System
+
+ `sudo apt-get update && sudo apt-get upgrade` - Update your system
+
+
+<!--### <a name="fulfillingRequirements"></a>Fulfilling requirements
 
 This project is not distributed with its dependencies; however, [Bower](http://bower.io/) will automatically pull them in.
 
-1. `sudo apt-get update && sudo apt-get upgrade` - Update your system
+ 1. `sudo apt-get update && sudo apt-get upgrade` - Update your system
 2. Install Node Package Manager (required for Bower) 
 
   ##### Raspberry Pi Zero
@@ -55,11 +63,13 @@ This project is not distributed with its dependencies; however, [Bower](http://b
 
 3. `sudo npm install -g bower` - Install Bower
 4. `cd ~/PI-Weather-Clock` - cd into the directory of the cloned project
-5. `bower install` - Install the project's dependencies
+5. `bower install` - Install the project's dependencies -->
 
 ### <a name="settingYourLocation"></a>Setting your location
 
-Open `config.js` and find the following section at the top:
+go to the cloned dir `cd ~/PI-Weather-Clock`
+
+Open `nano config.js` and find the following section at the top:
 
 ```javascript
     var longitude = 42.9634;
@@ -109,15 +119,15 @@ Unclutter causes the mouse cursor to disappear when the mouse isn't being moved.
 
 `sudo apt-get install unclutter`
 
-#### <a name="installingMidori"></a>Installing Midori
+#### <a name="installingChromium"></a>Installing Chromium
 
-Midori is used for its compatibility with multiple RPi generations and reasonably solid rendering. Other browsers may be used if preferred using much the same strategy.
+Chromium is used for the display.
 
-`sudo apt-get install midori`
+`sudo apt install -y chromium-browser`
 
 #### <a name="autoStartingMidori"></a>Auto-starting Unclutter and Midori
 
-1. Create a new directory at `~/.config/autostart` if it does not exist
+1. Create a new directory at `~/.config/autostart` if it does not exist - `mkdir ~/.config/autostart`
 2. `cd ~/.config/autostart` - cd into this directory
 3. `nano unclutterAuto.desktop` - Create a new .desktop file
 4. Add the following lines and save. Customize the file path to where this project's index.html lives on your Pi.
@@ -127,19 +137,21 @@ Midori is used for its compatibility with multiple RPi generations and reasonabl
 	Type=Application
 	Exec=unclutter -idle 0.1
 	```
-5. `nano midoriAuto.desktop` - Create a new .desktop file
+5. `nano chromiumAuto.desktop` - Create a new .desktop file
 
 	```
 	[Desktop Entry]
 	Type=Application
-	Exec=midori -e Fullscreen -a file:///home/pi/PI-Weather-Clock/index.html
+	Exec=chromium-browser --kiosk file:///home/pi/PI-Weather-Clock/index.html
 	```
 
-Your Pi should now atomatically start kiosk mode and show the dashboard full screen once your desktop loads.
+Your Pi should now atomatically start kiosk mode and show the dashboard full screen once your desktop loads.  Kiosk mode ignores any pop up windows like 'Restore last pages'.
+
+Check your computers time `date` NOTE: This will be the actual time and not include the time offset from the config file.
 
 If your time or date are incorrect, use `sudo raspi-config` to set your locale and timezone.
 
-### <a name="scheduling"></a>Scheduling screen sleep
+<!-- ### <a name="scheduling"></a>Scheduling screen sleep
 
 If you don't want your display to run 24/7, you can use cron jobs to fire a pair of included bash scripts: screenOff.sh and screenOn.sh. Please ensure you've completed the [Disallowing screen sleep](#disallowingScreenSleep) step above in order to keep the display always on during the times it's scheduled to be on.
 
@@ -155,7 +167,7 @@ If you don't want your display to run 24/7, you can use cron jobs to fire a pair
 	```
 	0 23 * * * /home/pi/Pi-Kitchen-Dashboard/screenOff.sh
 	0 6 * * * /home/pi/Pi-Kitchen-Dashboard/screenOn.sh
-	```
+	``` -->
 
 ## <a name="changingTheSkin"></a>Changing the skin
 
