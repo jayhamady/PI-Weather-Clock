@@ -2,8 +2,7 @@
 var longitude = 42.9634;
 var latitude = -85.6681;
 //Sign up for a darksky account https://darksky.net/dev/register
-var darkSkyID = 'fbafffc24be575025775ade69b897a7d';
-//Other Key -  6b93954aff24c2935cc6722594559c6d
+var darkSkyID = '';
 //City to display 
 var cityName = "Grand Rapids";
 //Image for Day
