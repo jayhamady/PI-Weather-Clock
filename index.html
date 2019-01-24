@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-   
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="config.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -56,18 +55,26 @@
               <h1 id="mainWeatherTemp" class="element" style="position: absolute;zoom:3;padding: 10px;">--&#176</h1>
               <h4 id="mainWeatherCity" style="position: absolute;padding: 10px;margin-left: 400px;margin-top: 10px"><div id="divCityName">Current City</div></h4>
               <h1 id="mainWeatherTempLow" class="element" style="position: absolute;zoom:1.5;margin-left: 55px;margin-top: 100px; color: gray">--&#176</h1>
-              <i id="mainWeatherIcon" class="wi wi-owm-night-800" class="text-center" style="color: white; zoom:12;margin-top: 10px;margin-left:16px; position: absolute"></i>
+              <i id="mainWeatherIcon" class="wi wi-owm-night-800" class="text-center" style="color: white;margin-top: 120px;margin-left: 210px;position: absolute;font-size: 11em;"></i>
               <h4 id="mainWeatherDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 220px;margin-top: 290px">Loading...</h4>
               <h5 id="mainWeatherFullDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 20px;margin-top: 350px">Full weather description</h5>
-              <i id="mainWeatherWindIcon" class="wi wi-wind towards-325-deg" class="text-center" style="color:white; zoom:7;margin-top: 37px;margin-left:68px; position: absolute"></i>
-              <h4 id="mainWeatherWindNumber" class="element" style="position: absolute;padding: 10px;margin-left: 420px;margin-top: 350px">Wind - mph</h4>
+              <i id="mainWeatherWindIcon" class="wi wi-wind towards-325-deg" class="text-center" style="color:white;margin-top: 275px;margin-left: 480px;position: absolute;font-size: 6em;"></i>
+              <h4 id="mainWeatherWindNumber" class="element" style="position: absolute;padding: 10px;margin-left: 440px;margin-top: 350px">Wind - mph</h4>
               <img id="mainWeatherCityImage" class="img-fluid" style="height: 400px;" src="">
           </div>
       
           <div class="col-md-5" style="margin-right:-20px">
-              <h1 id="mainClock" class="text-center" style="font-size: 9em;margin-top:-20px"  >--:--</h1>
-              <h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4>
+              <!-- <h1 id="mainClock" class="text-center" style="font-size: 12em;margin-top:-20px"  >--:--</h1>
+              <h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4> -->
                 <div class="container" id="hourForecast">
+                        <div class="row">
+                                <div class="col-sm-12 text-right"><h1 id="mainClock" class="text-center" style="font-size: 12em;margin-top:-20px"  >--:--</h1></div>
+                                <!-- <div class="col-sm-4"><h6 id="mainClockPMAM" style="font-size: 5em;margin-top:90px">PM</h6></div> -->
+                        </div> 
+                        <div class="row">
+                                    <div class="col-sm-12"><h4 id="mainDate" class="text-center" style="font-size: 1.5em; margin-top: -10px;margin-bottom: 20px"  >Day --/--/----</h4></div>
+                                    
+                        </div> 
                         <div class="row">
                             <div class="col-sm-4"><h4>--:-- am</h4></div>
                             <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
@@ -96,7 +103,7 @@
                                 <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
                                 <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
                         </div>  
-                        <div class="row">
+                        <!-- <div class="row">
                                 <div class="col-sm-4"><h4>--:-- am</h4></div>
                                 <div class="col-sm-2"><i class="wi wi-owm-night-800" class="text-center" style="color: white;font-size: 2em"></i></div>
                                 <div class="col-sm-2"><h4>--&#176</h4></div>
@@ -109,7 +116,7 @@
                                 <div class="col-sm-2"><h4>--&#176</h4></div>
                                 <div class="col-sm-1"><i class="wi wi-wind towards-325-deg" class="text-center" style="color: white;font-size: 2em"></i></div>
                                 <div class="col-sm-3 text-right"><h5>-- mph</h5></div>
-                        </div>                                                                         
+                        </div>                                                                          -->
                     </div>
           </div>
       
@@ -198,8 +205,15 @@
       var data;
       var fData
       var dayOrNight;
+      var tmpRefresh=0;
 
       var timeDisplay = document.getElementById("mainClock");
+
+        resizeWindow();
+        $(window).resize(function() {
+            resizeWindow();
+        });
+       
 
         //Load Data the first time
         GetData();
@@ -210,6 +224,31 @@
         //Refresh weather data
         setInterval(GetData, (weatherRefreshMinutes * 60000));
 
+        function resizeWindow(){
+             // For Higher Resolution Screens
+            if(window.innerWidth > 1500 && window.innerHeight > 900){
+                //Adjust image and other items
+                SetZoom('1.4','1.15');
+            }else{
+                SetZoom('1.0','1.0');
+            }
+        }
+
+        function SetZoom(zoom,zoom1){
+            $('#mainWeatherCityImage').css('zoom',zoom);
+                $('#mainWeatherWindNumber').css('zoom',zoom);
+                $('#mainWeatherWindIcon').css('zoom',zoom);
+                $('#mainWeatherIcon').css('zoom',zoom);
+                $('#mainWeatherFullDesc').css('zoom',zoom);
+                $('#mainWeatherDesc').css('zoom',zoom);
+                $('#mainWeatherCity').css('zoom',zoom);
+                $('#hourForecast').css('zoom',zoom);
+                for(var i=0;i<=5;i++){
+                    $($('#forecast').children()[i]).css('zoom',zoom1);
+                }
+            
+        }
+
         function GetData(){
             $.ajax({
                 type: "GET",
@@ -219,12 +258,15 @@
                 success: function(data){
                     loadWeather(data);
                     loadForecast(data);
+                    tmpRefresh=0;
                 },
                 error: function(error){
-                    alert("Error Calling Weather: " + error);
+                    tmpRefresh++;
+                    if(tmpRefresh==2){
+                        //Blank out Data with -- to show internet down
+                    }
                 }
             });
-
         }
 
         function refreshTime() {
@@ -256,7 +298,7 @@
         function loadForecast(weather){
 
             //load Data for the hour by hour forecast
-            for(var i=0;i<=5;i++){
+            for(var i=2;i<=5;i++){
                 var CW = weather.hourly.data[i * forecastNumberHoursSkip];
                 var d = new Date(CW.time * 1000);
 
@@ -298,7 +340,7 @@
             
             //weather.daily.data[0].summary
             $('#mainWeatherFullDesc').text(weather.daily.data[0].summary);
-            $('#mainWeatherIcon').attr('class', 'wi ' + transIcon(WC.icon) );
+            $('#mainWeatherIcon').attr('class', 'wi ' + transIcon(WC.icon, dayOrNight) );
             $('#mainWeatherTemp').text(Math.round(WC.temperature) + String.fromCharCode(176));
             $('#mainWeatherTempLow').text(Math.round(weather.daily.data[0].temperatureLow) + String.fromCharCode(176));
             $('#mainWeatherWindIcon').attr('class', 'wi wi-wind towards-' + weather.daily.data[0].windBearing + '-deg')

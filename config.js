@@ -2,7 +2,8 @@
 var longitude = 42.9634;
 var latitude = -85.6681;
 //Sign up for a darksky account https://darksky.net/dev/register
-var darkSkyID = '6b93954aff24c2935cc6722594559c6d';
+var darkSkyID = 'fbafffc24be575025775ade69b897a7d';
+//Other Key -  6b93954aff24c2935cc6722594559c6d
 //City to display 
 var cityName = "Grand Rapids";
 //Image for Day
@@ -18,4 +19,6 @@ var timeOffsetminutes = 15;
 //Time to refresh weather info in minutes - note free account gets 1000 a day
 var weatherRefreshMinutes = 60;
 //Forecast number of hour to skip on each hour forecast
-var forecastNumberHoursSkip = 2;
+var forecastNumberHoursSkip = 3;
+//Is Production - Pull live data - else pull JSON Test Data
+var isProduction = false;

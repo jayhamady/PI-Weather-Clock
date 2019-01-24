@@ -15,7 +15,6 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
         * [Auto-starting Unclutter and Midori](#autoStartingMidori)
     - [Scheduling screen sleep](#scheduling)
 + [Changing the skin](#changingTheSkin)
-+ [Creating skins](#creatingSkins)
 + [Credit](#credit)
 
 * * *
@@ -55,7 +54,7 @@ This project is not distributed with its dependencies; however, [Bower](http://b
     
 
 3. `sudo npm install -g bower` - Install Bower
-4. `cd ~/Pi-Kitchen-Dashboard` - cd into the directory of the cloned project
+4. `cd ~/PI-Weather-Clock` - cd into the directory of the cloned project
 5. `bower install` - Install the project's dependencies
 
 ### <a name="settingYourLocation"></a>Setting your location
@@ -99,10 +98,11 @@ Unless screen sleep is prevented, the dashboard screen will go black after a few
 
 Add the following lines to the [SeatDefaults] section:
 
+If you dont see a `[SeatDefaults]` make one
 ```bash
+[SeatDefaults]
 xserver-command=X -s 0 -dpms
 ```
-
 #### <a name="hideCursor"></a>Installing Unclutter
 
 Unclutter causes the mouse cursor to disappear when the mouse isn't being moved. This prevents the dash from having a cursor over the middle unless you plug in a mouse and move it elsewhere.
@@ -132,7 +132,7 @@ Midori is used for its compatibility with multiple RPi generations and reasonabl
 	```
 	[Desktop Entry]
 	Type=Application
-	Exec=midori -e Fullscreen -a file:///home/pi/Pi-Kitchen-Dashboard/index.html
+	Exec=midori -e Fullscreen -a file:///home/pi/PI-Weather-Clock/index.html
 	```
 
 Your Pi should now atomatically start kiosk mode and show the dashboard full screen once your desktop loads.
