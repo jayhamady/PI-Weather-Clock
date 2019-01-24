@@ -307,7 +307,7 @@
                 $($('#hourForecast').children()[i].children[0].children[0]).css("text-align","right");
                 $($('#hourForecast').children()[i].children[1].children[0]).attr('class','wi ' + transIcon(CW.icon,dayOrNight));
                 $('#hourForecast').children()[i].children[2].children[0].innerHTML = Math.round(CW.temperature) + String.fromCharCode(176);
-                $($('#hourForecast').children()[i].children[3].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing) + '-deg');
+                $($('#hourForecast').children()[i].children[3].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing - 180) + '-deg');
                 $('#hourForecast').children()[i].children[4].children[0].innerHTML = Math.round(CW.windSpeed) + ' mph';
             }
 
@@ -322,7 +322,7 @@
                 var CW = weather.daily.data[i];
 
                 $('#forecast').children()[i-1].children[0].innerHTML = days[tomorrow.getDay()];
-                $($('#forecast').children()[i-1].children[1].children[0].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing) + '-deg');
+                $($('#forecast').children()[i-1].children[1].children[0].children[0]).attr('class', 'wi wi-wind towards-' + Math.round(CW.windBearing - 180) + '-deg');
                 var wind = $('#forecast').children()[i-1].children[1].children[0].innerHTML;
                 $('#forecast').children()[i-1].children[1].children[0].innerHTML = wind.replace('--', Math.round( CW.windSpeed) )
                 $($('#forecast').children()[i-1].children[2].children[0]).attr('class','wi ' + transIcon(CW.icon,dayOrNight));
@@ -343,7 +343,7 @@
             $('#mainWeatherIcon').attr('class', 'wi ' + transIcon(WC.icon, dayOrNight) );
             $('#mainWeatherTemp').text(Math.round(WC.temperature) + String.fromCharCode(176));
             $('#mainWeatherTempLow').text(Math.round(weather.daily.data[0].temperatureLow) + String.fromCharCode(176));
-            $('#mainWeatherWindIcon').attr('class', 'wi wi-wind towards-' + weather.daily.data[0].windBearing + '-deg')
+            $('#mainWeatherWindIcon').attr('class', 'wi wi-wind towards-' + (weather.daily.data[0].windBearing - 180) + '-deg')
             $('#mainWeatherWindNumber').text('Wind ' + Math.round(weather.daily.data[0].windSpeed) + ' mph');
             $('#mainWeatherCity').text(cityName);
         }
