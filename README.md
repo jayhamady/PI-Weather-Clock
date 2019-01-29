@@ -171,6 +171,13 @@ add the following line
     sleep 5
     startx
 ```
+
+No mod the file to execute
+
+```
+sudo chmod +x superscript
+```
+
 Note: The sleep command is just to pause and see if there were updates before launching the OS UI
 
 Open up .bashrc for configuration:

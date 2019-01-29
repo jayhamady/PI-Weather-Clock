@@ -53,9 +53,9 @@
                 
           <div class="col-md-7" class="img-fluid">
                 <i class="wi wi-thermometer" class="text-center" style="color: white; zoom:2;margin-top: 20px;margin-left:5px; position: absolute"></i>
-              <h1 id="mainWeatherTemp" class="element" style="position: absolute;zoom:3;padding: 10px;">--&#176</h1>
+              <h1 id="mainWeatherTemp" class="element" style="position: absolute;zoom:3;padding: 10px;font-size: 3.5em;margin-left: 15px;">--&#176</h1>
               <h4 id="mainWeatherCity" style="position: absolute;padding: 10px;margin-left: 400px;margin-top: 10px"><div id="divCityName">Current City</div></h4>
-              <h1 id="mainWeatherTempLow" class="element" style="position: absolute;zoom:1.5;margin-left: 55px;margin-top: 100px; color: gray">--&#176</h1>
+              <!-- <h1 id="mainWeatherTempLow" class="element" style="position: absolute;zoom:1.5;margin-left: 55px;margin-top: 100px; color: gray">--&#176</h1> -->
               <i id="mainWeatherIcon" class="wi wi-owm-night-800" class="text-center" style="color: white;margin-top: 120px;margin-left: 210px;position: absolute;font-size: 11em;"></i>
               <h4 id="mainWeatherDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 240px;margin-top: 280px;font-size: 2em;">Loading...</h4>
               <h5 id="mainWeatherFullDesc" class="element text-center" style="position: absolute;padding: 10px;margin-left: 10px;margin-top: 335px;max-width: 400px;">Full weather description</h5>
@@ -229,9 +229,9 @@
              // For Higher Resolution Screens
             if(window.innerWidth > 1500 && window.innerHeight > 900){
                 //Adjust image and other items
-                SetZoom('1.4','1.15');
+                SetZoom('1.35','1.15');
             }else if(window.innerWidth > 1500 && window.innerHeight > 775){
-                SetZoom('1.3','1.10');
+                SetZoom('1.25','1.10');
             }else{
                 SetZoom('1.0','1.0');
             }
@@ -335,8 +335,8 @@
                 var wind = $('#forecast').children()[i-1].children[1].children[0].innerHTML;
                 $('#forecast').children()[i-1].children[1].children[0].innerHTML = wind.replace('--', Math.round( CW.windSpeed) )
                 $($('#forecast').children()[i-1].children[2].children[0]).attr('class','wi ' + transIcon(CW.icon,dayOrNight));
-                $('#forecast').children()[i-1].children[3].innerHTML = Math.round(CW.temperatureHigh) + String.fromCharCode(176);
-                $('#forecast').children()[i-1].children[4].innerHTML = Math.round(CW.temperatureLow) + String.fromCharCode(176);
+                $('#forecast').children()[i-1].children[3].innerHTML = Math.round(CW.temperatureMax) + String.fromCharCode(176);
+                $('#forecast').children()[i-1].children[4].innerHTML = Math.round(CW.temperatureMin) + String.fromCharCode(176);
             }
         }
 
@@ -358,7 +358,7 @@
             $('#mainWeatherFullDesc').text(weather.daily.data[0].summary);
             $('#mainWeatherIcon').attr('class', 'wi ' + transIcon(WC.icon, dayOrNight) );
             $('#mainWeatherTemp').text(Math.round(WC.temperature) + String.fromCharCode(176));
-            $('#mainWeatherTempLow').text(Math.round(weather.daily.data[0].temperatureLow) + String.fromCharCode(176));
+            $('#mainWeatherTempLow').text(Math.round(weather.daily.data[0].temperatureMin) + String.fromCharCode(176));
             $('#mainWeatherWindIcon').attr('class', 'wi wi-wind towards-' + (weather.daily.data[0].windBearing - 180) + '-deg')
             $('#mainWeatherWindNumber').text('Wind ' + Math.round(weather.daily.data[0].windSpeed) + ' mph');
             $('#mainWeatherCity').text(cityName);
