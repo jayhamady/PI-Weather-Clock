@@ -13,7 +13,7 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
         * [Disallowing screen sleep](#disallowingScreenSleep)
         * [Installing Unclutter](#hidingCursor)
         * [Installing Chromium](#installingChromium)
-        * [Auto-starting Unclutter and Midori](#autoStartingChromium)
+        * [Auto-starting Unclutter and Chromium](#autoStartingChromium)
         * [Auto-starting GitHub Pull Request for latest updates](#autoStartingGitHubPull)
         
     <!-- - [Scheduling screen sleep](#scheduling) -->
@@ -125,7 +125,10 @@ Unclutter causes the mouse cursor to disappear when the mouse isn't being moved.
 
 Chromium is used for the display.
 
-`sudo apt install -y chromium-browser`
+```
+sudo apt-get update
+sudo apt-get install chromium-browser --yes
+```
 
 #### <a name="autoStartingChromium"></a>Auto-starting Unclutter and Chromium
 
@@ -163,9 +166,13 @@ add the following line
 ```
     cd ~/PI-Weather-Clock
     cp config.js ~/config.js
-    git pull https://github.com/jayhamady/PI-Weather-Clock master
+    git pull https://github.com/jayhamady/PI-Weather-Clock.git
     cp ~/config.js ~/PI-Weather-Clock/config.js
+    sleep 5
+    startx
 ```
+Note: The sleep command is just to pause and see if there were updates before launching the OS UI
+
 Open up .bashrc for configuration:
 
 `$ sudo nano .bashrc`

@@ -16,6 +16,6 @@ var fullDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 //Time to offset clock time in minutes
 var timeOffsetminutes = 15;
 //Time to refresh weather info in minutes - note free account gets 1000 a day
-var weatherRefreshMinutes = 60;
+var weatherRefreshMinutes = 1;
 //Forecast number of hour to skip on each hour forecast
 var forecastNumberHoursSkip = 3;
