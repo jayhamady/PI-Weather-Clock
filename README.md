@@ -5,6 +5,7 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
 
 + [Items Needed](#itemsNeeded)
 + [Instructions](#instructions)
+    - [Installing OS](#installOS)
     - [Cloning](#cloning)
     - [Update System](#updatingSystem)
     <!-- - [Fulfilling requirements](#fulfillingRequirements) -->
@@ -30,6 +31,13 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
 + Internet connection
 
 ## <a name="instructions"></a>Instructions
+
+### <a name="installOS"></a>Installing OS
+
+Go to URL `https://www.raspberrypi.org/downloads/raspbian/` and download the `Raspbian Stretch with Desktop` version 
+
+use `Win32DiskImager` from  `https://sourceforge.net/projects/win32diskimager/files/latest/download` to write OS to the SD card.
+
 
 ### <a name="cloning"></a>Cloning
 
@@ -134,7 +142,7 @@ sudo apt-get install chromium-browser --yes
 
 1. Create a new directory at `~/.config/autostart` if it does not exist - `mkdir ~/.config/autostart`
 2. `cd ~/.config/autostart` - cd into this directory
-3. `nano unclutterAuto.desktop` - Create a new .desktop file
+3. `sudo nano unclutterAuto.desktop` - Create a new .desktop file
 4. Add the following lines and save. Customize the file path to where this project's index.html lives on your Pi.
 
 	```
@@ -142,7 +150,7 @@ sudo apt-get install chromium-browser --yes
 	Type=Application
 	Exec=unclutter -idle 0.1
 	```
-5. `nano chromiumAuto.desktop` - Create a new .desktop file
+5. `sudo nano chromiumAuto.desktop` - Create a new .desktop file
 
 	```
 	[Desktop Entry]
@@ -168,11 +176,9 @@ add the following line
     cp config.js ~/config.js
     git pull https://github.com/jayhamady/PI-Weather-Clock.git
     cp ~/config.js ~/PI-Weather-Clock/config.js
-    sleep 5
-    startx
 ```
 
-No mod the file to execute
+Now mod the file to execute
 
 ```
 sudo chmod +x superscript
