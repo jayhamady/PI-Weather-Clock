@@ -8,7 +8,7 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
     - [Installing OS](#installOS)
     - [Cloning](#cloning)
     - [Update System](#updatingSystem)
-    <!-- - [Fulfilling requirements](#fulfillingRequirements) -->
+    - [Fulfilling requirements](#fulfillingRequirements)
     - [Setting your location](#settingYourLocation)
     - [Configuring your Pi](#configuringYourPi)
         * [Disallowing screen sleep](#disallowingScreenSleep)
@@ -34,10 +34,14 @@ This project turns your monitor and Raspberry Pi Zero into a simple, skinnable t
 
 ### <a name="installOS"></a>Installing OS
 
-Go to URL `https://www.raspberrypi.org/downloads/raspbian/` and download the `Raspbian Stretch with Desktop` version 
+Go to URL `https://www.raspberrypi.org/downloads/raspbian/` and download the `Raspbian Stretch with Desktop` version (raspbian-stretch not full will save room).
 
 use `Win32DiskImager` from  `https://sourceforge.net/projects/win32diskimager/files/latest/download` to write OS to the SD card.
 
+Once Image to on SD card connect the PI to the monitor and setup OS with the Wizzard including WIFI.
+
+`Note`
+The default user is  pi, and the password is raspberry
 
 ### <a name="cloning"></a>Cloning
 
@@ -52,28 +56,9 @@ If your Pi does not currently have git, you will need to install it first with `
  `sudo apt-get update && sudo apt-get upgrade` - Update your system
 
 
-<!--### <a name="fulfillingRequirements"></a>Fulfilling requirements
+### <a name="fulfillingRequirements"></a>Fulfilling requirements
 
-This project is not distributed with its dependencies; however, [Bower](http://bower.io/) will automatically pull them in.
-
- 1. `sudo apt-get update && sudo apt-get upgrade` - Update your system
-2. Install Node Package Manager (required for Bower) 
-
-  ##### Raspberry Pi Zero
-
-  ```
-  wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv6l.tar.gz 
-  tar -xvf node-v4.0.0-linux-armv6l.tar.gz 
-  cd node-v4.0.0-linux-armv6l
-  sudo cp -R * /usr/local/
-  ```
-
-  <a href="http://blog.wia.io/installing-node-js-v4-0-0-on-a-raspberry-pi/">Node install instructions</a> by <a href="http://blog.wia.io/author/conall/">Conall Laverty</a>
-    
-
-3. `sudo npm install -g bower` - Install Bower
-4. `cd ~/PI-Weather-Clock` - cd into the directory of the cloned project
-5. `bower install` - Install the project's dependencies -->
+This project you will need a `https://darksky.net/dev` Dark Syk free account (no card is needed) you will get a 1000 requests a day for free.
 
 ### <a name="settingYourLocation"></a>Setting your location
 
@@ -104,6 +89,8 @@ Open `nano config.js` and find the following section at the top:
     var forecastNumberHoursSkip = 2;
 ```
 
+`NOTE:`  All items can be customized and changed for your application.
+
 Change these variables to match your location, unit measurement, and desired update interval, and your part of the coding is done!
 
 ### <a name="configuringYourPi"></a>Configuring your Pi
@@ -118,7 +105,7 @@ Unless screen sleep is prevented, the dashboard screen will go black after a few
 
 Add the following lines to the [SeatDefaults] section:
 
-If you dont see a `[SeatDefaults]` make one
+If you dont see a `[SeatDefaults]` make one after the `[Seat:*]`
 ```bash
 [SeatDefaults]
 xserver-command=X -s 0 -dpms
@@ -155,8 +142,11 @@ sudo apt-get install chromium-browser --yes
 	```
 	[Desktop Entry]
 	Type=Application
-	Exec=chromium-browser --full-screen --disable-infobars --disable-translate file:///home/pi/PI-Weather-Clock/index.html
+	Exec=chromium-browser --kiosk --incognito file:///home/pi/PI-Weather-Clock/index.html
 	```
+
+`Note: To get out of the mode press alt+F4`
+
 Your Pi should now atomatically start fullscreen mode and show the dashboard full screen once your desktop loads.  Kiosk mode ignores any pop up windows like 'Restore last pages'.
 
 #### <a name="autoStartingGitHubPull"></a>Auto-starting Github pull for new updates
@@ -180,9 +170,7 @@ add the following line
 
 Now mod the file to execute
 
-```
-sudo chmod +x superscript
-```
+`sudo chmod +x superscript`
 
 Note: The sleep command is just to pause and see if there were updates before launching the OS UI
 
@@ -193,9 +181,6 @@ Scroll down to the bottom and add the line: `
 ```
 ./superscript
 ```
-
-
-
 
 #### <a name="TimeConfig"></a>Time Configuration
 
